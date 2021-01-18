@@ -15,8 +15,8 @@ const FirstLock = ({ setKey }) => {
                         <Icon size="massive" name="key"></Icon>
                         <Header as="h2">Create a Passkey</Header>
                         <p>
-                            You can provide this key to access your links in the
-                            future. <br />
+                            You will provide this key to access your links in
+                            the future. <br />
                             Make sure that it is secure.
                         </p>
                     </Segment>
@@ -29,7 +29,7 @@ const FirstLock = ({ setKey }) => {
                         />
                     </Form.Field>
                     <Button
-                        content="Secure links"
+                        content="Create Link Vault"
                         icon="lock"
                         color="orange"
                         size="big"

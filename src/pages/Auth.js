@@ -1,27 +1,41 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Dimmer, Loader } from 'semantic-ui-react';
+import { doesDBExist } from '../database';
 import InitialLock from '../components/InitialLock';
 import Unlock from '../components/Unlock';
 import mainStyles from '../styles/main.module.scss';
 
 const Auth = ({ authMode }) => {
+    const loader = (
+        <Dimmer active inverted>
+            <Loader inverted>Loading</Loader>
+        </Dimmer>
+    );
+
     let [key, setKey] = useState('');
+    let [form, setForm] = useState(loader);
+    // useEffect(() => {
+    //     console.log(key);
+    // }, [key]);
 
     useEffect(() => {
-        console.log(key);
-    }, [key]);
+        //based on if there is already a db in existance, show a certain form
+        async function getForm() {
+            try {
+                const formComponent = (await doesDBExist()) ? (
+                    <Unlock />
+                ) : (
+                    <InitialLock />
+                );
+                setForm(formComponent);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getForm();
+    }, []);
 
-    let form;
-    switch (authMode) {
-        case 'unlock':
-            form = <Unlock setKey={setKey} />;
-            break;
-        case 'initial_lock':
-            form = <InitialLock setKey={setKey} />;
-            break;
-        default:
-            form = <h1>Wrong Page</h1>;
-    }
     return (
         <div className={mainStyles.backgroundSlant}>
             <div className={mainStyles.centerContent}>{form}</div>

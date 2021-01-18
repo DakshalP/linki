@@ -2,14 +2,13 @@ import React from 'react';
 import styles from '../styles/main.module.scss';
 import { Segment, Container, Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
-
 import Footer from '../components/Footer';
 
 const Home = () => {
     const history = useHistory();
 
     const routeChange = () => {
-        let path = `/auth/initial`;
+        let path = `/auth`;
         history.push(path);
     };
 

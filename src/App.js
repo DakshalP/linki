@@ -10,12 +10,7 @@ const App = () => (
     <Router>
         <Switch>
             <Route exact path="/list" component={LinkList} />
-            <Route exact path="/auth/initial">
-                <Auth authMode="initial_lock" />
-            </Route>
-            <Route exact path="/auth">
-                <Auth authMode="unlock" />
-            </Route>
+            <Route exact path="/auth" component={Auth} />
             <Route exact path="/" component={Home} />
             <Route component={NotFound} />
         </Switch>
