@@ -1,0 +1,37 @@
+// background(s) from svgbackgrounds.com
+
+@mixin maximize {
+    width: 100vw;
+    height: 100vh;
+}
+
+.background {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23f2711c' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23994812' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23f2711c' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23a24c13' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23f2711c' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23ab5014' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23f2711c' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23b45515' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23f2711c' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23be5916' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23f2711c' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23c75d17' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+    @include maximize;
+}
+
+.backgroundSlant {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg fill-opacity='0.81'%3E%3Cpolygon fill='%23ffe3d1' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23ffc7a4' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%23ffaa79' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%23fc8e4d' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%23f2711c' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+    @include maximize;
+}
+
+.centerContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.mainHeader {
+    font-size: 100px;
+}
+
+.subHeader {
+    font-size: 70px;
+}
