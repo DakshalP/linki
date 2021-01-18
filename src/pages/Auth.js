@@ -13,11 +13,7 @@ const Auth = ({ authMode }) => {
         </Dimmer>
     );
 
-    let [key, setKey] = useState('');
     let [form, setForm] = useState(loader);
-    // useEffect(() => {
-    //     console.log(key);
-    // }, [key]);
 
     useEffect(() => {
         //based on if there is already a db in existance, show a certain form
@@ -26,6 +22,7 @@ const Auth = ({ authMode }) => {
                 const formComponent = (await doesDBExist()) ? (
                     <Unlock />
                 ) : (
+                    //debugging
                     <InitialLock />
                 );
                 setForm(formComponent);

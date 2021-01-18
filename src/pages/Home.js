@@ -1,16 +1,24 @@
-import React from 'react';
-import styles from '../styles/main.module.scss';
-import { Segment, Container, Button } from 'semantic-ui-react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Segment, Container, Button } from 'semantic-ui-react';
 import Footer from '../components/Footer';
+import styles from '../styles/main.module.scss';
+import { doesDBExist } from '../database';
 
 const Home = () => {
-    const history = useHistory();
+    let history = useHistory();
 
     const routeChange = () => {
         let path = `/auth`;
         history.push(path);
     };
+
+    useEffect(() => {
+        const testDB = async () => {
+            if (await doesDBExist()) routeChange();
+        };
+        testDB();
+    }, []);
 
     return (
         <>
