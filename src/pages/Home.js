@@ -35,7 +35,7 @@ const Home = () => {
                         labelPosition="left"
                         size="huge"
                         color="orange"
-                    ></Button>
+                    />
                 </Container>
             </div>
             <Footer />

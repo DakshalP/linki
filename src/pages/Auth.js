@@ -6,7 +6,7 @@ import InitialLock from '../components/InitialLock';
 import Unlock from '../components/Unlock';
 import mainStyles from '../styles/main.module.scss';
 
-const Auth = ({ authMode }) => {
+const Auth = ({ setStore }) => {
     const loader = (
         <Dimmer active inverted>
             <Loader inverted>Loading</Loader>
@@ -20,10 +20,10 @@ const Auth = ({ authMode }) => {
         async function getForm() {
             try {
                 const formComponent = (await doesDBExist()) ? (
-                    <Unlock />
+                    <Unlock setStore={setStore} />
                 ) : (
                     //debugging
-                    <InitialLock />
+                    <InitialLock setStore={setStore} />
                 );
                 setForm(formComponent);
             } catch (err) {

@@ -1,9 +1,16 @@
 import React from 'react';
-import { Header, Button, Form, Segment, Icon } from 'semantic-ui-react';
+import {
+    Header,
+    Button,
+    Form,
+    Segment,
+    Icon,
+    Message,
+} from 'semantic-ui-react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import authStyles from '../styles/auth.module.scss';
+import formStyles from '../styles/form.module.scss';
 
 const AuthForm = ({
     submitFunction,
@@ -12,9 +19,10 @@ const AuthForm = ({
     formDescription,
     buttonContent,
     buttonIcon,
+    dbError,
 }) => {
     return (
-        <div className={authStyles.authForm}>
+        <div className={formStyles.mediumFormWidth}>
             <Segment>
                 <Formik
                     initialValues={{ passkey: '' }}
@@ -34,7 +42,7 @@ const AuthForm = ({
                         errors,
                     }) => (
                         <Form
-                            error={!!errors.passkey}
+                            error={!!errors.passkey || !!dbError}
                             onSubmit={handleSubmit}
                             loading={isSubmitting}
                         >
@@ -58,6 +66,13 @@ const AuthForm = ({
                                 type="password"
                                 size="huge"
                             />
+                            {dbError ? (
+                                <Message
+                                    error
+                                    header="Try again"
+                                    content={dbError}
+                                />
+                            ) : null}
                             <Button
                                 content={buttonContent}
                                 icon={buttonIcon}
