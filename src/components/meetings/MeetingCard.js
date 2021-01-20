@@ -50,9 +50,8 @@ const MeetingCard = ({ name, link, pass, day, color, time }) => {
     return (
         <Card
             color={color || 'orange'}
-            centered
             header={<h2 style={{ margin: 0 }}>{name}</h2>}
-            meta={day && time ? `${day} at ${time}` : null}
+            meta={time ? time : null}
             description={description}
             extra={
                 <Button
