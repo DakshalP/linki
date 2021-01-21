@@ -32,7 +32,7 @@ const Auth = ({ setStore }) => {
             }
         }
         getForm();
-    }, []);
+    }, [setStore]);
 
     return (
         <div className={mainStyles.backgroundSlant}>

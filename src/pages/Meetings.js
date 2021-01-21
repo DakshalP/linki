@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import MeetingCardGroup from '../components/meetings/MeetingCardGroup';
 import { Container, Segment, Header, Icon, Loader } from 'semantic-ui-react';
 
@@ -22,14 +22,8 @@ const Meetings = ({ store }) => {
     const [loading, setLoading] = useState(false);
     const [editMode, setEditMode] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await loadMeetings();
-        };
-        fetchData();
-    }, [store]);
-
-    const loadMeetings = async () => {
+    //useCallback to memoize for useEffect and prevent unnecessary re-render
+    const loadMeetings = useCallback(async () => {
         try {
             setLoading(true);
             const meets = await getAllMeetings(store);
@@ -38,7 +32,14 @@ const Meetings = ({ store }) => {
         } catch (err) {
             console.log(err);
         }
-    };
+    }, [store]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await loadMeetings();
+        };
+        fetchData();
+    }, [store, loadMeetings]);
 
     const onDelete = async (meetingId) => {
         setLoading(true);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Segment, Container, Button } from 'semantic-ui-react';
 import styles from '../styles/main.module.scss';
@@ -8,17 +8,18 @@ import { doesDBExist } from '../database';
 const Home = () => {
     let history = useHistory();
 
-    const routeChange = () => {
+    //useCallback to memoize for useEffect and prevent unnecessary re-render
+    const routeChange = useCallback(() => {
         let path = `/auth`;
         history.push(path);
-    };
+    }, [history]);
 
     useEffect(() => {
         const testDB = async () => {
             if (await doesDBExist()) routeChange();
         };
         testDB();
-    }, []);
+    }, [routeChange]);
 
     return (
         <>
