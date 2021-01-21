@@ -23,7 +23,7 @@ const InitialLock = ({ setStore }) => {
         formHeader: 'Create a Passkey',
         formIcon: 'key',
         formDescription:
-            'You will provide this key to access your links in the future. \n Make sure that it is secure.',
+            'You will provide this key to access your links in the future. \n Make sure that it is secure and that you can remember it.',
         buttonContent: 'Create Link Vault',
         buttonIcon: 'lock',
         dbError,
