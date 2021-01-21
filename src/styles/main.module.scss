@@ -1,9 +1,11 @@
-// backgrounds from svgbackgrounds.com
+$primary: #f2711c;
 
 @mixin maximize {
     width: 100vw;
     height: 100vh;
 }
+
+// backgrounds from svgbackgrounds.com
 
 .background {
     background-color: #ffffff;

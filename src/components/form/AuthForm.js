@@ -8,9 +8,9 @@ import {
     Message,
 } from 'semantic-ui-react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
+import { authSchema } from '../../config/yupSchemas';
 
-import formStyles from '../styles/form.module.scss';
+import formStyles from '../../styles/form.module.scss';
 
 const AuthForm = ({
     submitFunction,
@@ -26,12 +26,7 @@ const AuthForm = ({
             <Segment>
                 <Formik
                     initialValues={{ passkey: '' }}
-                    validationSchema={Yup.object({
-                        passkey: Yup.string()
-                            .min(6, 'Must be at least 6 characters.')
-                            .required('Required')
-                            .max(15, '15 characters or less'),
-                    })}
+                    validationSchema={authSchema}
                     onSubmit={submitFunction}
                 >
                     {({

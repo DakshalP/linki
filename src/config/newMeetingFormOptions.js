@@ -1,4 +1,5 @@
 const dayOptions = [
+    { key: 'none', text: 'None', value: '' },
     { key: 'Monday', text: 'Monday', value: 'Monday' },
     { key: 'Tuesday', text: 'Tuesday', value: 'Tuesday' },
     { key: 'Wednesday', text: 'Wednesday', value: 'Wednesday' },
@@ -10,48 +11,48 @@ const dayOptions = [
 
 const colorOptions = [
     {
-        key: 'default',
-        text: 'default',
+        key: 'none',
+        text: 'Default',
         value: '',
     },
     {
         key: 'red',
-        text: 'red',
+        text: 'Red',
         value: 'red',
     },
     {
         key: 'green',
-        text: 'green',
+        text: 'Green',
         value: 'green',
     },
     {
         key: 'blue',
-        text: 'blue',
+        text: 'Blue',
         value: 'blue',
     },
     {
         key: 'violet',
-        text: 'violet',
+        text: 'Violet',
         value: 'violet',
     },
     {
         key: 'brown',
-        text: 'brown',
+        text: 'Brown',
         value: 'brown',
     },
     {
         key: 'grey',
-        text: 'grey',
+        text: 'Grey',
         value: 'grey',
     },
     {
         key: 'purple',
-        text: 'purple',
+        text: 'Purple',
         value: 'purple',
     },
     {
         key: 'pink',
-        text: 'pink',
+        text: 'Pink',
         value: 'pink',
     },
 ];

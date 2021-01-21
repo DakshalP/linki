@@ -1,9 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
-import SemanticFieldWrapper from '../components/form/SemanticFieldWrapper';
-import { createMeeting } from '../database';
-import * as Yup from 'yup';
+
 import {
     Form,
     Button,
@@ -13,37 +11,14 @@ import {
     Divider,
     Input,
 } from 'semantic-ui-react';
-import { dayOptions, colorOptions } from '../components/form/newFormOptions';
+
+import SemanticFieldWrapper from '../components/form/SemanticFieldWrapper';
+import { createMeeting } from '../database';
+import { newMeetingSchema } from '../config/yupSchemas';
+import { dayOptions, colorOptions } from '../config/newMeetingFormOptions';
 
 import formStyles from '../styles/form.module.scss';
 import mainStyles from '../styles/main.module.scss';
-
-const yupSchema = Yup.object({
-    name: Yup.string().max(35, 'Name is too long').required('Required'),
-    link: Yup.string()
-        .required('Required')
-        .when('zoomPinOnly', {
-            is: false,
-            then: Yup.string().url(
-                'Invalid url. Format like https://example.com'
-            ),
-        })
-        .when('zoomPinOnly', {
-            is: true,
-            then: Yup.string().matches(
-                /^\d+$/,
-                'Zoom pin can have digits only'
-            ),
-        }),
-    day: Yup.string(),
-    time: Yup.string().matches(
-        /^((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))$/,
-        'Format time like this HH:MM AM/PM'
-    ),
-    pass: Yup.string(),
-    color: Yup.string(),
-    zoomPinOnly: Yup.boolean(),
-});
 
 const renderError = (inputName, errors, touched) =>
     touched[inputName] && errors[inputName]
@@ -87,7 +62,7 @@ const NewMeeting = ({ store }) => {
                             zoomPinOnly: false,
                         }}
                         enableReinitialize={true}
-                        validationSchema={yupSchema}
+                        validationSchema={newMeetingSchema}
                         onSubmit={onSubmit}
                     >
                         {({
@@ -157,19 +132,21 @@ const NewMeeting = ({ store }) => {
 
                                 <Form.Group widths="equal">
                                     <SemanticFieldWrapper
-                                        label="Recurring day"
+                                        label="Day (Recurring)"
                                         name="day"
                                         options={dayOptions}
                                         component={Form.Dropdown}
                                         placeholder="Pick one"
                                         selection
                                         onChange={handleChange}
+                                        fluid
                                     />
                                     <Form.Input
                                         label="Time"
                                         name="time"
                                         placeholder="10:30 AM"
                                         onChange={handleChange}
+                                        fluid
                                         error={renderError(
                                             'time',
                                             errors,

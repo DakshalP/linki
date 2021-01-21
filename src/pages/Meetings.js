@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MeetingCardGroup from '../components/meetings/MeetingCardGroup';
-import {
-    Container,
-    Segment,
-    Header,
-    Icon,
-    Loader,
-    Button,
-    Label,
-    Menu,
-    Checkbox,
-} from 'semantic-ui-react';
+import { Container, Segment, Header, Icon, Loader } from 'semantic-ui-react';
+
+import { MeetingsHeader } from '../components/Headers';
 import { getAllMeetings, deleteMeeting } from '../database';
 import { Link } from 'react-router-dom';
 
@@ -29,44 +21,6 @@ const Meetings = ({ store }) => {
     const [meetings, setMeetings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [editMode, setEditMode] = useState(false);
-
-    const header = (
-        <Menu size="large" secondary pointing>
-            <Menu.Item as={Link} to="/">
-                <Label color="orange" size="big" content="Linki" />
-            </Menu.Item>
-            <Menu.Item position="right">
-                <Button
-                    content="New Meeting"
-                    as={Link}
-                    to="/meetings/new"
-                    size="large"
-                    color="orange"
-                    icon="plus"
-                />
-            </Menu.Item>
-            <Menu.Item>
-                <Button
-                    content="Remove"
-                    size="large"
-                    basic={!editMode}
-                    onClick={() => setEditMode(!editMode)}
-                    color="orange"
-                    icon="trash"
-                />
-            </Menu.Item>
-            <Menu.Item>
-                <Button
-                    as={Link}
-                    to="/"
-                    size="large"
-                    basic
-                    color="orange"
-                    icon="lock"
-                />
-            </Menu.Item>
-        </Menu>
-    );
 
     useEffect(() => {
         const fetchData = async () => {
@@ -115,7 +69,7 @@ const Meetings = ({ store }) => {
 
     return (
         <>
-            {header}
+            <MeetingsHeader {...{ editMode, setEditMode }} />
             <Container textAlign="center">
                 <Segment basic textAlign="center">
                     <h1>Your Meetings</h1>

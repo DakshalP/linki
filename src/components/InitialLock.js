@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import AuthForm from './AuthForm';
+import AuthForm from './form/AuthForm';
 import { createStore } from '../database';
 
 const InitialLock = ({ setStore }) => {

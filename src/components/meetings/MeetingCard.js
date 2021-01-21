@@ -21,7 +21,6 @@ const MeetingCard = ({
     onDelete,
 }) => {
     const [showPass, setShowPass] = useState(false);
-    const [remove, setRemove] = useState(false);
     const [copied, setCopied] = useState(false);
 
     const description = (
