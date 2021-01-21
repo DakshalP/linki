@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Segment, Container, Button } from 'semantic-ui-react';
-import Footer from '../components/Footer';
 import styles from '../styles/main.module.scss';
+import Footer from '../components/Footer';
 import { doesDBExist } from '../database';
 
 const Home = () => {

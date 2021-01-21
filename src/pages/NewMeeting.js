@@ -19,12 +19,14 @@ import formStyles from '../styles/form.module.scss';
 import mainStyles from '../styles/main.module.scss';
 
 const yupSchema = Yup.object({
-    name: Yup.string().required('Required'),
+    name: Yup.string().max(35, 'Name is too long').required('Required'),
     link: Yup.string()
         .required('Required')
         .when('zoomPinOnly', {
             is: false,
-            then: Yup.string().url('Invalid url'),
+            then: Yup.string().url(
+                'Invalid url. Format like https://example.com'
+            ),
         })
         .when('zoomPinOnly', {
             is: true,

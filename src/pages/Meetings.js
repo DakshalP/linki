@@ -9,8 +9,9 @@ import {
     Button,
     Label,
     Menu,
+    Checkbox,
 } from 'semantic-ui-react';
-import { getAllMeetings } from '../database';
+import { getAllMeetings, deleteMeeting } from '../database';
 import { Link } from 'react-router-dom';
 
 const days = [
@@ -25,40 +26,76 @@ const days = [
 ];
 
 const Meetings = ({ store }) => {
-    let [meetings, setMeetings] = useState(null);
+    const [meetings, setMeetings] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [editMode, setEditMode] = useState(false);
 
     const header = (
         <Menu size="large" secondary pointing>
             <Menu.Item as={Link} to="/">
                 <Label color="orange" size="big" content="Linki" />
             </Menu.Item>
-            <Menu.Item as={Link} to="/meetings/new" position="right">
-                <Label
-                    size="big"
+            <Menu.Item position="right">
+                <Button
+                    content="New Meeting"
+                    as={Link}
+                    to="/meetings/new"
+                    size="large"
+                    color="orange"
+                    icon="plus"
+                />
+            </Menu.Item>
+            <Menu.Item>
+                <Button
+                    content="Remove"
+                    size="large"
+                    basic={!editMode}
+                    onClick={() => setEditMode(!editMode)}
+                    color="orange"
+                    icon="trash"
+                />
+            </Menu.Item>
+            <Menu.Item>
+                <Button
+                    as={Link}
+                    to="/"
+                    size="large"
                     basic
                     color="orange"
-                    content="New Meeting"
-                    icon="plus"
+                    icon="lock"
                 />
             </Menu.Item>
         </Menu>
     );
 
-    // const meetingExample = {
-    //     name: 'Biology',
-    //     link: 'https://example.com/meet',
-    //     pass: 'example1234',
-    //     day: 'Tuesday',
-    //     color: 'green',
-    //     time: Date.now(),
-    // };
-
     useEffect(() => {
-        getAllMeetings(store).then((m) => setMeetings(m));
-        console.log(meetings);
+        const fetchData = async () => {
+            await loadMeetings();
+        };
+        fetchData();
     }, [store]);
 
-    const onDelete = async (meeting) => {};
+    const loadMeetings = async () => {
+        try {
+            setLoading(true);
+            const meets = await getAllMeetings(store);
+            setMeetings(meets);
+            setLoading(false);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const onDelete = async (meetingId) => {
+        setLoading(true);
+        try {
+            await deleteMeeting(store, { _id: meetingId });
+            await loadMeetings();
+            setLoading(false);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const categorizeMeetingsByDay = (meetings) =>
         days.map((day) => {
@@ -66,9 +103,11 @@ const Meetings = ({ store }) => {
             if (Object.keys(meetsOnDay).length !== 0) {
                 return (
                     <MeetingCardGroup
+                        key={day}
                         header={day || 'Not recurring'}
                         meetings={meetsOnDay}
                         onDelete={onDelete}
+                        editMode={editMode}
                     />
                 );
             } else return null;
@@ -82,12 +121,12 @@ const Meetings = ({ store }) => {
                     <h1>Your Meetings</h1>
                 </Segment>
                 <Segment basic>
-                    {meetings !== null && meetings.length > 0 ? (
-                        categorizeMeetingsByDay(meetings)
-                    ) : meetings === null ? (
+                    {loading ? (
                         <Loader active inline="centered">
                             Loading Meetings
                         </Loader>
+                    ) : meetings.length > 0 ? (
+                        categorizeMeetingsByDay(meetings)
                     ) : (
                         <Header size="huge" icon>
                             <Icon name="folder open" />
@@ -99,16 +138,6 @@ const Meetings = ({ store }) => {
                         </Header>
                     )}
                 </Segment>
-                {/* <div styles={{ position: 'fixed', bottom: 0, right: 0 }}>
-                <Button
-                    as={Link}
-                    to="/meetings/new"
-                    circular
-                    color="orange"
-                    icon="plus"
-                    size="huge"
-                />
-            </div> */}
             </Container>
         </>
     );

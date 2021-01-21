@@ -4,6 +4,7 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 import { doesDBExist } from '../database';
 import InitialLock from '../components/InitialLock';
 import Unlock from '../components/Unlock';
+import Header from '../components/Header';
 import mainStyles from '../styles/main.module.scss';
 
 const Auth = ({ setStore }) => {
@@ -35,6 +36,7 @@ const Auth = ({ setStore }) => {
 
     return (
         <div className={mainStyles.backgroundSlant}>
+            <Header />
             <div className={mainStyles.centerContent}>{form}</div>
         </div>
     );

@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+} from 'react-router-dom';
 import Home from './pages/Home';
 import Meetings from './pages/Meetings';
 import Auth from './pages/Auth';
@@ -8,15 +13,24 @@ import 'semantic-ui-css/semantic.min.css';
 import NewMeeting from './pages/NewMeeting';
 
 const App = () => {
-    let [store, setStore] = useState();
+    const [store, setStore] = useState();
+
     return (
         <Router>
             <Switch>
                 <Route exact path="/meetings">
-                    {!store ? <NotFound /> : <Meetings store={store} />}
+                    {!store ? (
+                        <Redirect to="/auth" />
+                    ) : (
+                        <Meetings store={store} />
+                    )}
                 </Route>
                 <Route exact path="/meetings/new">
-                    {!store ? <NotFound /> : <NewMeeting store={store} />}
+                    {!store ? (
+                        <Redirect to="/auth" />
+                    ) : (
+                        <NewMeeting store={store} />
+                    )}
                 </Route>
                 <Route exact path="/auth">
                     <Auth setStore={setStore} />

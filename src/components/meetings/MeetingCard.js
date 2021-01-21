@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Button, Divider, Label } from 'semantic-ui-react';
+import { Card, Button, Divider, Label, Transition } from 'semantic-ui-react';
 
 function copyToClipboard(value) {
     var tempInput = document.createElement('input');
@@ -10,13 +10,33 @@ function copyToClipboard(value) {
     document.body.removeChild(tempInput);
 }
 
-const MeetingCard = ({ name, link, pass, day, color, time }) => {
+const MeetingCard = ({
+    _id,
+    name,
+    link,
+    pass,
+    color,
+    time,
+    editMode,
+    onDelete,
+}) => {
     const [showPass, setShowPass] = useState(false);
+    const [remove, setRemove] = useState(false);
     const [copied, setCopied] = useState(false);
 
     const description = (
         <>
-            <Label as="a" basic floating content="🗑️" circular />
+            <Transition visible={editMode} animation="zoom" duration={500}>
+                <Label
+                    as="a"
+                    basic
+                    floating
+                    content="❌"
+                    size="large"
+                    circular
+                    onClick={() => onDelete(_id)}
+                />
+            </Transition>
             <Divider hidden />
             {pass ? (
                 <>

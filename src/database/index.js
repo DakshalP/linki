@@ -42,7 +42,7 @@ const createMeeting = async (store, meeting) => {
 };
 
 const deleteMeeting = async (store, meeting) => {
-    await store.delete(meeting._id);
+    await store.del(meeting._id);
 };
 
 const getMeeting = async (store, key) => {
@@ -57,4 +57,11 @@ const getAllMeetings = async (store) => {
     return meetings;
 };
 
-export { createStore, createMeeting, getMeeting, getAllMeetings, doesDBExist };
+export {
+    createStore,
+    createMeeting,
+    getMeeting,
+    deleteMeeting,
+    getAllMeetings,
+    doesDBExist,
+};
