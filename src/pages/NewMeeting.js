@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import MeetingForm from '../components/form/MeetingForm';
@@ -6,6 +6,8 @@ import { createMeeting } from '../database';
 import mainStyles from '../styles/main.module.scss';
 
 const NewMeeting = ({ store }) => {
+    const [dbError, setDBError] = useState('');
+
     const history = useHistory();
     const routeChange = () => {
         let path = `/meetings`;
@@ -18,7 +20,10 @@ const NewMeeting = ({ store }) => {
         try {
             await createMeeting(store, values);
             routeChange();
-        } catch (err) {}
+        } catch (err) {
+            setDBError(`${err.message}`);
+            console.log(dbError);
+        }
         actions.setSubmitting(false);
     };
 
@@ -32,6 +37,7 @@ const NewMeeting = ({ store }) => {
                 submitButtonIcon="plus"
                 onSubmit={onSubmit}
                 onCancel={routeChange}
+                dbError={dbError}
             />
         </div>
     );

@@ -9,6 +9,7 @@ import {
     Header,
     Divider,
     Input,
+    Message,
 } from 'semantic-ui-react';
 
 import SemanticFieldWrapper from './SemanticFieldWrapper';
@@ -24,6 +25,7 @@ const MeetingForm = ({
     title,
     submitButtonName,
     submitButtonIcon,
+    dbError,
 }) => {
     const renderError = (inputName, errors, touched) =>
         touched[inputName] && errors[inputName]
@@ -59,7 +61,9 @@ const MeetingForm = ({
                         touched,
                     }) => (
                         <Form
-                            error={Object.keys(errors).length !== 0}
+                            error={
+                                Object.keys(errors).length !== 0 || !!dbError
+                            }
                             loading={isSubmitting}
                             onSubmit={handleSubmit}
                         >
@@ -165,6 +169,14 @@ const MeetingForm = ({
                                 size="big"
                                 icon="cancel"
                             />
+
+                            {dbError ? (
+                                <Message
+                                    error
+                                    header="Try again"
+                                    content={dbError}
+                                />
+                            ) : null}
                         </Form>
                     )}
                 </Formik>
