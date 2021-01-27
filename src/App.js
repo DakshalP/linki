@@ -11,6 +11,7 @@ import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
 import 'semantic-ui-css/semantic.min.css';
 import NewMeeting from './pages/NewMeeting';
+import Meeting from './pages/EditMeeting';
 
 const App = () => {
     const [store, setStore] = useState();
@@ -32,6 +33,18 @@ const App = () => {
                         <NewMeeting store={store} />
                     )}
                 </Route>
+                <Route
+                    path="/meetings/:id"
+                    render={(routeProps) => (
+                        <>
+                            {!store ? (
+                                <Redirect to="/auth" />
+                            ) : (
+                                <Meeting store={store} {...routeProps} />
+                            )}
+                        </>
+                    )}
+                />
                 <Route exact path="/auth">
                     <Auth setStore={setStore} />
                 </Route>

@@ -3,8 +3,8 @@ import MeetingCardGroup from '../components/meetings/MeetingCardGroup';
 import { Container, Segment, Header, Icon, Loader } from 'semantic-ui-react';
 
 import { MeetingsHeader } from '../components/Headers';
-import { getAllMeetings, deleteMeeting } from '../database';
-import { Link } from 'react-router-dom';
+import { getAllMeetings } from '../database';
+import { Link, useHistory } from 'react-router-dom';
 
 const days = [
     'Monday',
@@ -21,6 +21,7 @@ const Meetings = ({ store }) => {
     const [meetings, setMeetings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [editMode, setEditMode] = useState(false);
+    const history = useHistory();
 
     //useCallback to memoize for useEffect and prevent unnecessary re-render
     const loadMeetings = useCallback(async () => {
@@ -41,16 +42,7 @@ const Meetings = ({ store }) => {
         fetchData();
     }, [store, loadMeetings]);
 
-    const onDelete = async (meetingId) => {
-        setLoading(true);
-        try {
-            await deleteMeeting(store, { _id: meetingId });
-            await loadMeetings();
-            setLoading(false);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    const onEdit = async (meetingId) => history.push(`/meetings/${meetingId}`);
 
     const categorizeMeetingsByDay = (meetings) =>
         days.map((day) => {
@@ -61,7 +53,7 @@ const Meetings = ({ store }) => {
                         key={day}
                         header={day || 'Not recurring'}
                         meetings={meetsOnDay}
-                        onDelete={onDelete}
+                        onEdit={onEdit}
                         editMode={editMode}
                     />
                 );

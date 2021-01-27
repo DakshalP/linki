@@ -31,11 +31,16 @@ $primary: #f2711c;
     @include maximize;
 }
 
+.backgroundMaxSize {
+    @include maximize;
+}
+
 .centerContent {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 70vh;
+    flex-direction: column;
 }
 
 .mainHeader {

@@ -18,7 +18,7 @@ const MeetingCard = ({
     color,
     time,
     editMode,
-    onDelete,
+    onEdit,
 }) => {
     const [showPass, setShowPass] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -30,10 +30,11 @@ const MeetingCard = ({
                     as="a"
                     basic
                     floating
-                    content="❌"
-                    size="large"
+                    content="✏️"
+                    size="big"
+                    color="orange"
                     circular
-                    onClick={() => onDelete(_id)}
+                    onClick={() => onEdit(_id)}
                 />
             </Transition>
             <Divider hidden />

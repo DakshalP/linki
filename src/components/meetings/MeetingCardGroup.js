@@ -2,7 +2,7 @@ import React from 'react';
 import MeetingCard from './MeetingCard';
 import { Card, Divider } from 'semantic-ui-react';
 
-const MeetingCardGroup = ({ header, meetings, onDelete, editMode }) => (
+const MeetingCardGroup = ({ header, meetings, onEdit, editMode }) => (
     <>
         <Divider hidden />
         {header ? (
@@ -14,7 +14,7 @@ const MeetingCardGroup = ({ header, meetings, onDelete, editMode }) => (
             {meetings.map((meeting) => (
                 <MeetingCard
                     key={meeting._id}
-                    onDelete={onDelete}
+                    onEdit={onEdit}
                     editMode={editMode}
                     {...meeting}
                 />

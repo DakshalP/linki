@@ -22,6 +22,7 @@ import formStyles from '../../styles/form.module.scss';
 const MeetingForm = ({
     onSubmit,
     onCancel,
+    initialMeetingValues,
     title,
     submitButtonName,
     submitButtonIcon,
@@ -39,15 +40,7 @@ const MeetingForm = ({
         <div className={formStyles.mediumFormWidth}>
             <Segment>
                 <Formik
-                    initialValues={{
-                        name: '',
-                        link: '',
-                        day: '',
-                        time: '',
-                        pass: '',
-                        color: '',
-                        zoomPinOnly: false,
-                    }}
+                    initialValues={initialMeetingValues}
                     enableReinitialize={true}
                     validationSchema={newMeetingSchema}
                     onSubmit={onSubmit}

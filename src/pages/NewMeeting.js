@@ -5,6 +5,16 @@ import MeetingForm from '../components/form/MeetingForm';
 import { createMeeting } from '../database';
 import mainStyles from '../styles/main.module.scss';
 
+const initialMeetingValues = {
+    name: '',
+    link: '',
+    day: '',
+    time: '',
+    pass: '',
+    color: '',
+    zoomPinOnly: false,
+};
+
 const NewMeeting = ({ store }) => {
     const [dbError, setDBError] = useState('');
 
@@ -38,6 +48,7 @@ const NewMeeting = ({ store }) => {
                 onSubmit={onSubmit}
                 onCancel={routeChange}
                 dbError={dbError}
+                initialMeetingValues={initialMeetingValues}
             />
         </div>
     );

@@ -19,12 +19,12 @@ export const MeetingsHeader = ({ editMode, setEditMode }) => (
         </Menu.Item>
         <Menu.Item>
             <Button
-                content="Remove"
+                content="Edit"
                 size="large"
                 basic={!editMode}
                 onClick={() => setEditMode(!editMode)}
                 color="orange"
-                icon="trash"
+                icon="edit outline"
             />
         </Menu.Item>
         <Menu.Item>

@@ -41,6 +41,12 @@ const createMeeting = async (store, meeting) => {
     await store.set(meetingId, meeting);
 };
 
+const editMeeting = async (store, meeting) => {
+    if (!store || !meeting) throw Error('Error editing Meeting DB.');
+    const meetingId = meeting._id;
+    await store.set(meetingId, meeting);
+};
+
 const deleteMeeting = async (store, meeting) => {
     await store.del(meeting._id);
 };
@@ -59,8 +65,9 @@ const getAllMeetings = async (store) => {
 
 export {
     createStore,
-    createMeeting,
     getMeeting,
+    createMeeting,
+    editMeeting,
     deleteMeeting,
     getAllMeetings,
     doesDBExist,
