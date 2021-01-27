@@ -87,12 +87,14 @@ const MeetingForm = ({
                                 placeholder="Ex: Friday Night Meet"
                                 onChange={handleChange}
                                 error={renderError('name', errors, touched)}
+                                value={values.name}
                             />
                             <Form.Field error={touched.link && !!errors.link}>
                                 <label>Link</label>
                                 <Input
                                     name="link"
                                     onChange={handleChange}
+                                    value={values.link}
                                     label={
                                         values.zoomPinOnly ? (
                                             'https://zoom.us/j/'
@@ -121,6 +123,7 @@ const MeetingForm = ({
                                 <SemanticFieldWrapper
                                     label="Day (Recurring)"
                                     name="day"
+                                    value={values.day}
                                     options={dayOptions}
                                     component={Form.Dropdown}
                                     placeholder="Pick one"
@@ -131,6 +134,7 @@ const MeetingForm = ({
                                 <Form.Input
                                     label="Time"
                                     name="time"
+                                    value={values.time}
                                     placeholder="10:30 AM"
                                     onChange={handleChange}
                                     fluid
@@ -141,12 +145,14 @@ const MeetingForm = ({
                             <Form.Input
                                 name="pass"
                                 label="Passcode "
+                                value={values.pass}
                                 onChange={handleChange}
                             />
 
                             <SemanticFieldWrapper
                                 label="Color"
                                 name="color"
+                                value={values.color}
                                 placeholder="Pick one"
                                 selection
                                 options={colorOptions}

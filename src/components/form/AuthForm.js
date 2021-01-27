@@ -35,6 +35,7 @@ const AuthForm = ({
                         isSubmitting,
                         touched,
                         errors,
+                        values,
                     }) => (
                         <Form
                             error={!!errors.passkey || !!dbError}
@@ -56,6 +57,7 @@ const AuthForm = ({
                                         : null
                                 }
                                 placeholder="Key"
+                                value={values.passkey}
                                 onChange={handleChange}
                                 name="passkey"
                                 type="password"
