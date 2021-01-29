@@ -1,19 +1,29 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import MeetingCardGroup from '../components/meetings/MeetingCardGroup';
-import { Container, Segment, Header, Icon, Loader } from 'semantic-ui-react';
+import {
+    Container,
+    Segment,
+    Header,
+    Icon,
+    Loader,
+    Divider,
+    Label,
+} from 'semantic-ui-react';
 
 import { MeetingsHeader } from '../components/Headers';
 import { getAllMeetings } from '../database';
 import { Link, useHistory } from 'react-router-dom';
 
+import meetingStyles from '../styles/meetings.module.scss';
+
 const days = [
+    'Sunday',
     'Monday',
     'Tuesday',
     'Wednesday',
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday',
     '',
 ];
 
@@ -44,6 +54,34 @@ const Meetings = ({ store }) => {
 
     const onEdit = async (meetingId) => history.push(`/meetings/${meetingId}`);
 
+    const getMeetingsFromToday = (meetings) => {
+        const today = days[new Date().getDay()];
+        const meetsToday = meetings.filter((meet) => meet.day === today);
+        if (Object.keys(meetsToday).length !== 0)
+            return (
+                <>
+                    <Segment basic>
+                        <div className={meetingStyles.highlight}>
+                            <MeetingCardGroup
+                                header={
+                                    <>
+                                        <h1>Today</h1>
+                                        <Label pointing basic>
+                                            {today}
+                                        </Label>
+                                    </>
+                                }
+                                meetings={meetsToday}
+                                onEdit={onEdit}
+                                editMode={editMode}
+                            />
+                        </div>
+                    </Segment>
+                </>
+            );
+        else return null;
+    };
+
     const categorizeMeetingsByDay = (meetings) =>
         days.map((day) => {
             const meetsOnDay = meetings.filter((meet) => meet.day === day);
@@ -51,10 +89,11 @@ const Meetings = ({ store }) => {
                 return (
                     <MeetingCardGroup
                         key={day}
-                        header={day || 'Not recurring'}
+                        header={day || 'Other'}
                         meetings={meetsOnDay}
                         onEdit={onEdit}
                         editMode={editMode}
+                        isSecondary={true}
                     />
                 );
             } else return null;
@@ -65,7 +104,7 @@ const Meetings = ({ store }) => {
             <MeetingsHeader {...{ editMode, setEditMode }} />
             <Container textAlign="center">
                 <Segment basic textAlign="center">
-                    <h1>Your Meetings</h1>
+                    <h1 className={meetingStyles.header}>Your Meetings</h1>
                 </Segment>
                 <Segment basic>
                     {loading ? (
@@ -73,7 +112,10 @@ const Meetings = ({ store }) => {
                             Loading Meetings
                         </Loader>
                     ) : meetings.length > 0 ? (
-                        categorizeMeetingsByDay(meetings)
+                        <>
+                            {getMeetingsFromToday(meetings)}
+                            {categorizeMeetingsByDay(meetings)}
+                        </>
                     ) : (
                         <Header size="huge" icon>
                             <Icon name="folder open" />
