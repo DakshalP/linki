@@ -6,7 +6,6 @@ import {
     Header,
     Icon,
     Loader,
-    Divider,
     Label,
 } from 'semantic-ui-react';
 
