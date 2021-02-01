@@ -9,9 +9,9 @@ import Home from './pages/Home';
 import Meetings from './pages/Meetings';
 import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
-import 'semantic-ui-css/semantic.min.css';
 import NewMeeting from './pages/NewMeeting';
 import Meeting from './pages/EditMeeting';
+import 'semantic-ui-css/semantic.min.css';
 
 const App = () => {
     const [store, setStore] = useState();

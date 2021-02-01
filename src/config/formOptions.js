@@ -57,4 +57,10 @@ const colorOptions = [
     },
 ];
 
-export { dayOptions, colorOptions };
+const sortOptions = [
+    { key: 'day', text: 'Day', value: 'day', icon: 'calendar' },
+    { key: 'color', text: 'Color', value: 'color', icon: 'tint' },
+    { key: 'none', text: 'All', value: 'none', icon: 'th' },
+];
+
+export { dayOptions, colorOptions, sortOptions };
