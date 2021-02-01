@@ -84,12 +84,17 @@ const MeetingGroup = ({ categorizeBy, onEdit, editMode, meetings }) => {
     };
 
     const colorGroup = () => {
-        return colors.map((color) => {
+        const meetingGroups = colors.map((color) => {
             const meetsWithColor = meetings.filter(
                 (meet) => meet.color === color
             );
             return renderGroup(meetsWithColor, color);
         });
+        //no color
+        const otherColor = meetings.filter((meet) => meet.color === '');
+        meetingGroups.push(renderGroup(otherColor, 'default'));
+
+        return meetingGroups;
     };
 
     switch (categorizeBy) {
