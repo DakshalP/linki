@@ -1,6 +1,7 @@
 import React from 'react';
 import MeetingCard from './MeetingCard';
 import { Card, Divider, Segment } from 'semantic-ui-react';
+import styles from '../../styles/meetings.module.scss';
 
 const MeetingCardGroup = ({
     header,
@@ -13,7 +14,7 @@ const MeetingCardGroup = ({
         <Divider hidden />
         {header ? (
             <Divider horizontal>
-                <h3>{header}</h3>
+                <span className={styles.groupHeader}>{header}</span>
             </Divider>
         ) : null}
         <Card.Group centered={!isSecondary}>
