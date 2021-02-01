@@ -15,7 +15,7 @@ import {
 import SemanticFieldWrapper from './SemanticFieldWrapper';
 
 import { newMeetingSchema } from '../../config/yupSchemas';
-import { dayOptions, colorOptions } from '../../config/newMeetingFormOptions';
+import { dayOptions, colorOptions } from '../../config/formOptions';
 
 import formStyles from '../../styles/form.module.scss';
 

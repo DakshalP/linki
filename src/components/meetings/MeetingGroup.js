@@ -13,13 +13,24 @@ const days = [
     'Saturday',
 ];
 
-const MeetingGroup = ({ type, onEdit, editMode, meetings }) => {
-    const renderGroup = (meetings, header, key) => {
+const colors = [
+    'red',
+    'green',
+    'blue',
+    'violet',
+    'brown',
+    'grey',
+    'purple',
+    'pink',
+];
+
+const MeetingGroup = ({ categorizeBy, onEdit, editMode, meetings }) => {
+    const renderGroup = (meetings, identifier) => {
         if (Object.keys(meetings).length !== 0) {
             return (
                 <MeetingCardGroup
-                    key={key}
-                    header={header}
+                    key={identifier}
+                    header={identifier}
                     meetings={meetings}
                     onEdit={onEdit}
                     editMode={editMode}
@@ -62,23 +73,43 @@ const MeetingGroup = ({ type, onEdit, editMode, meetings }) => {
             const day = days[(todayNum + j) % days.length];
 
             const meetsOnDay = meetings.filter((meet) => meet.day === day);
-            meetingGroups.push(renderGroup(meetsOnDay, day, day));
+            meetingGroups.push(renderGroup(meetsOnDay, day));
         }
 
         //uncategorized days
         const otherDays = meetings.filter((meet) => meet.day === '');
-        meetingGroups.push(renderGroup(otherDays, 'other', 'other'));
+        meetingGroups.push(renderGroup(otherDays, 'other'));
 
         return meetingGroups;
     };
 
-    switch (type) {
-        case 'today':
-            return todayGroup();
-        case 'daily':
-            return dailyGroup();
+    const colorGroup = () => {
+        return colors.map((color) => {
+            const meetsWithColor = meetings.filter(
+                (meet) => meet.color === color
+            );
+            return renderGroup(meetsWithColor, color);
+        });
+    };
+
+    switch (categorizeBy) {
+        case 'day':
+            return (
+                <>
+                    {todayGroup()}
+                    {dailyGroup()}
+                </>
+            );
+        case 'color':
+            return colorGroup();
         default:
-            return <div>No meetings in this category.</div>;
+            return (
+                <MeetingCardGroup
+                    meetings={meetings}
+                    editMode={editMode}
+                    onEdit={onEdit}
+                />
+            );
     }
 };
 
