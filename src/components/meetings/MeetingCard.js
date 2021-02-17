@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Card, Button, Divider, Label, Transition } from 'semantic-ui-react';
+import {
+    Card,
+    Button,
+    Divider,
+    Label,
+    Transition,
+    Icon,
+    Popup,
+} from 'semantic-ui-react';
+import styles from '../../styles/meetings.module.scss';
 
 function copyToClipboard(value) {
     var tempInput = document.createElement('input');
@@ -10,16 +19,7 @@ function copyToClipboard(value) {
     document.body.removeChild(tempInput);
 }
 
-const MeetingCard = ({
-    _id,
-    name,
-    link,
-    pass,
-    color,
-    time,
-    editMode,
-    onEdit,
-}) => {
+const MeetingCard = ({ _id, name, link, pass, color, time, onEdit }) => {
     const [showPass, setShowPass] = useState(false);
     const [copied, setCopied] = useState(false);
 
@@ -37,18 +37,6 @@ const MeetingCard = ({
 
     const description = (
         <>
-            <Transition visible={editMode} animation="zoom" duration={500}>
-                <Label
-                    as="a"
-                    basic
-                    floating
-                    content="✏️"
-                    size="big"
-                    color="orange"
-                    circular
-                    onClick={() => onEdit(_id)}
-                />
-            </Transition>
             <Divider hidden />
             {pass ? (
                 <>
@@ -67,10 +55,53 @@ const MeetingCard = ({
         </>
     );
 
+    const header = (
+        <>
+            <div className={styles.dropdown}>
+                <Popup
+                    trigger={
+                        <Icon
+                            className={styles.dropdownIcon}
+                            color="black"
+                            name="angle down"
+                        />
+                    }
+                    content={
+                        <div className={styles.dropdownMenu}>
+                            <p onClick={() => onEdit(_id)}>
+                                <Icon name="edit" />
+                                Edit
+                            </p>
+                            <Divider />
+                            <p onClick={() => copyToClipboard(link)}>
+                                <Icon name="chain" />
+                                Copy link
+                            </p>
+                            {pass ? (
+                                <>
+                                    <Divider />
+                                    <p onClick={() => copyToClipboard(pass)}>
+                                        <Icon name="eye" />
+                                        Copy pass
+                                    </p>
+                                </>
+                            ) : null}
+                        </div>
+                    }
+                    on="click"
+                    position="bottom"
+                />
+            </div>
+
+            {/* meeting title */}
+            <h2 style={{ margin: 0 }}>{name}</h2>
+        </>
+    );
+
     return (
         <Card
             color={color || 'orange'}
-            header={<h2 style={{ margin: 0 }}>{name}</h2>}
+            header={header}
             meta={time ? time : null}
             description={description}
             extra={

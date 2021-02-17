@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu, Label, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-export const MeetingsHeader = ({ editMode, setEditMode }) => (
+export const MeetingsHeader = () => (
     <Menu size="large" secondary pointing>
         <Menu.Item as={Link} to="/">
             <Label color="orange" size="big" content="Linki" />
@@ -18,14 +18,12 @@ export const MeetingsHeader = ({ editMode, setEditMode }) => (
             />
         </Menu.Item>
         <Menu.Item>
-            <Button
+            {/* <Button
                 content="Edit"
                 size="large"
-                basic={!editMode}
-                onClick={() => setEditMode(!editMode)}
                 color="orange"
                 icon="edit outline"
-            />
+            /> */}
         </Menu.Item>
         <Menu.Item>
             <Button

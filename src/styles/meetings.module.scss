@@ -12,3 +12,28 @@ $primary: #f2711c;
     padding: 0 20px;
     margin-bottom: 50px;
 }
+
+.dropdown {
+    text-align: right;
+}
+
+.dropdownIcon {
+    cursor: pointer;
+    transition: all 0.1s;
+    border-radius: 100%;
+    &:hover {
+        border: 2px solid grey;
+        width: 20px;
+        height: 20px;
+        transform: scale(1.5);
+    }
+}
+
+.dropdownMenu {
+    p {
+        cursor: pointer;
+        &:active {
+            color: $primary;
+        }
+    }
+}
