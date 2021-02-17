@@ -23,6 +23,18 @@ const MeetingCard = ({
     const [showPass, setShowPass] = useState(false);
     const [copied, setCopied] = useState(false);
 
+    const handleLaunch = () => {
+        if (pass) {
+            copyToClipboard(pass);
+            setCopied(true);
+
+            setTimeout(() => {
+                window.open(link);
+                setCopied(false);
+            }, 600);
+        } else window.open(link);
+    };
+
     const description = (
         <>
             <Transition visible={editMode} animation="zoom" duration={500}>
@@ -52,18 +64,6 @@ const MeetingCard = ({
                     />
                 </>
             ) : null}
-            <Label
-                onClick={() => {
-                    copyToClipboard(link);
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 400);
-                }}
-                as="a"
-                color="grey"
-                basic
-                content={copied ? 'Link copied!' : 'Copy'}
-                icon={copied ? 'check' : 'clipboard'}
-            />
         </>
     );
 
@@ -75,14 +75,12 @@ const MeetingCard = ({
             description={description}
             extra={
                 <Button
-                    onClick={() => {
-                        window.open(link);
-                    }}
+                    onClick={handleLaunch}
                     fluid
                     size="large"
                     color={color || 'orange'}
-                    content={'Launch'}
-                    icon="rocket"
+                    content={copied ? 'Password copied!' : 'Launch'}
+                    icon={copied ? 'check' : 'rocket'}
                 />
             }
         />
