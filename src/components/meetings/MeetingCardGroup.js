@@ -7,7 +7,6 @@ const MeetingCardGroup = ({
     header,
     meetings,
     onEdit,
-    editMode,
     isSecondary = false,
 }) => (
     <Segment basic secondary={isSecondary}>
@@ -19,12 +18,7 @@ const MeetingCardGroup = ({
         ) : null}
         <Card.Group centered={!isSecondary}>
             {meetings.map((meeting) => (
-                <MeetingCard
-                    key={meeting._id}
-                    onEdit={onEdit}
-                    editMode={editMode}
-                    {...meeting}
-                />
+                <MeetingCard key={meeting._id} onEdit={onEdit} {...meeting} />
             ))}
         </Card.Group>
     </Segment>

@@ -19,7 +19,6 @@ import MeetingGroup from '../components/meetings/MeetingGroup';
 const Meetings = ({ store }) => {
     const [meetings, setMeetings] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [editMode, setEditMode] = useState(false);
     const [sort, setSort] = useState('day');
     const history = useHistory();
 
@@ -46,7 +45,7 @@ const Meetings = ({ store }) => {
 
     return (
         <>
-            <MeetingsHeader {...{ editMode, setEditMode }} />
+            <MeetingsHeader />
             <Container textAlign="center">
                 <Segment basic textAlign="center">
                     <h1 className={meetingStyles.header}>Your Meetings</h1>
@@ -75,7 +74,7 @@ const Meetings = ({ store }) => {
                     ) : meetings.length > 0 ? (
                         <MeetingGroup
                             categorizeBy={sort}
-                            {...{ meetings, onEdit, editMode }}
+                            {...{ meetings, onEdit }}
                         />
                     ) : (
                         <Header size="huge" icon>
