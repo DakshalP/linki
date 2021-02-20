@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-    Card,
-    Button,
-    Divider,
-    Label,
-    Transition,
-    Icon,
-    Popup,
-} from 'semantic-ui-react';
+import { Card, Button, Divider, Label, Icon, Popup } from 'semantic-ui-react';
 import styles from '../../styles/meetings.module.scss';
 
 function copyToClipboard(value) {
