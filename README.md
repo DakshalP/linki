@@ -1,5 +1,7 @@
 # Linki
 
+[Try it out](https://linki.netlify.app)
+
 A simple way to store and manage links for online video meetings.
 
 -   Fully encrypted local data storage
