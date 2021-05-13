@@ -90,7 +90,7 @@ const EditMeeting = ({ store, match }) => {
                     <Divider hidden />
                     <MeetingForm
                         title="Edit meeting"
-                        submitButtonName="Change"
+                        submitButtonName="Update"
                         submitButtonIcon="exchange"
                         onSubmit={onSubmit}
                         onCancel={routeChange}
