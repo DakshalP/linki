@@ -13,10 +13,19 @@ const getUUID = () => {
     );
 };
 
+function IndexDBException() {
+    this.name = 'IndexDBException';
+    this.message = 'IndexDB not supported.';
+}
+
 const doesDBExist = async () => {
-    return (await window.indexedDB.databases())
-        .map((db) => db.name)
-        .includes(LINK_DB_NAME);
+    let indexedDB = window.indexedDB;
+    if (!indexedDB) {
+        throw new IndexDBException();
+    } else
+        return (await indexedDB.databases())
+            .map((db) => db.name)
+            .includes(LINK_DB_NAME);
 };
 
 const createStore = async (passkey) => {

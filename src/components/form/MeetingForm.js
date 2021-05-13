@@ -83,7 +83,7 @@ const MeetingForm = ({
                                 value={values.name}
                             />
                             <Form.Field error={touched.link && !!errors.link}>
-                                <label>Link</label>
+                                <label>{(values.zoomPinOnly) ? "Pin" : "Link"}</label>
                                 <Input
                                     name="link"
                                     onChange={handleChange}
@@ -163,10 +163,10 @@ const MeetingForm = ({
                                 content={submitButtonName}
                             />
                             <Button
+                                content="Cancel"
                                 onClick={onCancel}
                                 basic
                                 size="big"
-                                icon="cancel"
                             />
 
                             {dbError ? (

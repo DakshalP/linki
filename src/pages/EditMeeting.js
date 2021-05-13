@@ -68,6 +68,7 @@ const EditMeeting = ({ store, match }) => {
     } else if (typeof meeting === 'undefined') {
         return <h1>Meeting not found.</h1>;
     } else {
+        if(meeting.zoomPinOnly) meeting.link = meeting.link.replace(/\D/g,''); //remove link text if only zoom pin was entered
         return (
             <div className={mainStyles.backgroundSquare}>
                 <div
@@ -89,7 +90,7 @@ const EditMeeting = ({ store, match }) => {
                     <Divider hidden />
                     <MeetingForm
                         title="Edit meeting"
-                        submitButtonName="Change"
+                        submitButtonName="Update"
                         submitButtonIcon="exchange"
                         onSubmit={onSubmit}
                         onCancel={routeChange}
