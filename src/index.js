@@ -5,9 +5,9 @@ import App from './App';
 /**
  * Polyfill for indexedDB.databases()
  * Safari and some other older browsers that support indexedDB do NOT
- * Support enumerating existing databases. This is problematic when it
- * comes time to cleanup, otherwise we could litter their device with
- * unreferenceable database handles forcing a nuclear browser clear all history.
+ * Support enumerating existing databases.
+ *
+ * Credit: https://stackoverflow.com/questions/57787209/safari-does-not-support-indexeddb-databases
  */
 
 (function () {
