@@ -5,7 +5,7 @@ import { doesDBExist } from '../database';
 import InitialLock from '../components/InitialLock';
 import Unlock from '../components/Unlock';
 import Header from '../components/Headers';
-import ErrorCard from '../components/ErrorCard'
+import ErrorCard from '../components/ErrorCard';
 import mainStyles from '../styles/main.module.scss';
 
 const Auth = ({ setStore }) => {
@@ -28,8 +28,17 @@ const Auth = ({ setStore }) => {
                 );
                 setForm(formComponent);
             } catch (err) {
-                if(err.name === "IndexDBException") setForm(<ErrorCard databaseError />);
-                else console.error("Error connecting to database: \n" + err);
+                if (err.name === 'IndexDBException')
+                    setForm(<ErrorCard databaseError />);
+                else {
+                    console.error('Error connecting to database: \n' + err);
+                    setForm(
+                        <ErrorCard
+                            title="Database Error"
+                            message="Sorry, your device browser does not support the database this app uses. Please try another device."
+                        />
+                    );
+                }
             }
         }
         getForm();
