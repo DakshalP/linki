@@ -13,15 +13,8 @@ const ErrorCard = ({ title, message, databaseError }) => {
                         Your device browser does not support a stable version of
                         the database that this app uses.
                     </p>
-                    <p>
-                        <strong>
-                            Please switch to a different computer if using iOS
-                            or iPadOS (this is a known issue in these operating
-                            systems).
-                        </strong>
-                    </p>
 
-                    <p>Try this link on a desktop computer: </p>
+                    <p>Try this link on a different computer: </p>
                     <Label
                         content="linki.netlify.app"
                         size="big"

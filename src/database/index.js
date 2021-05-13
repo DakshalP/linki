@@ -13,17 +13,10 @@ const getUUID = () => {
     );
 };
 
-function IndexDBException() {
-    this.name = 'IndexDBException';
-    this.message = 'IndexDB not supported.';
-}
-
 const doesDBExist = async () => {
-    let indexedDB = window.indexedDB;
-    if (!indexedDB) {
-        throw new IndexDBException();
-    } else
-        return (await indexedDB.databases())
+    if (!window.indexedDB) throw new Error('IndexedDB not supported');
+    else
+        return (await window.indexedDB.databases())
             .map((db) => db.name)
             .includes(LINK_DB_NAME);
 };
