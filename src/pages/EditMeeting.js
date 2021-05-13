@@ -68,6 +68,7 @@ const EditMeeting = ({ store, match }) => {
     } else if (typeof meeting === 'undefined') {
         return <h1>Meeting not found.</h1>;
     } else {
+        if(meeting.zoomPinOnly) meeting.link = meeting.link.replace(/\D/g,''); //remove link text if only zoom pin was entered
         return (
             <div className={mainStyles.backgroundSquare}>
                 <div
