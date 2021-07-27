@@ -1,5 +1,18 @@
 $primary: #f2711c;
 
+.cardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 30px;
+}
+
+.cardFlex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
 .header {
     font-size: 3.5em;
 }
