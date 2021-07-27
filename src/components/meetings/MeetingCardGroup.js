@@ -1,7 +1,8 @@
 import React from 'react';
 import MeetingCard from './MeetingCard';
-import { Card, Divider, Segment } from 'semantic-ui-react';
+import { Divider, Segment } from 'semantic-ui-react';
 import styles from '../../styles/meetings.module.scss';
+import { isElement } from 'react-dom/cjs/react-dom-test-utils.production.min';
 
 //convert to comparable numbers [HH, MM]
 const convertTime = (time) => {
@@ -45,17 +46,18 @@ const MeetingCardGroup = ({
                 <span className={styles.groupHeader}>{header}</span>
             </Divider>
         ) : null}
-        <Card.Group centered={!isSecondary}>
+        <div className={isSecondary ? styles.cardGrid : styles.cardFlex}>
             {meetings
                 .sort((a, b) => compareTimes(a.time, b.time))
                 .map((meeting) => (
                     <MeetingCard
                         key={meeting._id}
                         onEdit={onEdit}
+                        isSecondary={isSecondary}
                         {...meeting}
                     />
                 ))}
-        </Card.Group>
+        </div>
     </Segment>
 );
 

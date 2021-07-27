@@ -11,7 +11,16 @@ function copyToClipboard(value) {
     document.body.removeChild(tempInput);
 }
 
-const MeetingCard = ({ _id, name, link, pass, color, time, onEdit }) => {
+const MeetingCard = ({
+    _id,
+    name,
+    link,
+    pass,
+    color,
+    time,
+    onEdit,
+    isSecondary,
+}) => {
     const [showPass, setShowPass] = useState(false);
     const [copied, setCopied] = useState(false);
 
@@ -92,10 +101,12 @@ const MeetingCard = ({ _id, name, link, pass, color, time, onEdit }) => {
 
     return (
         <Card
+            fluid={isSecondary}
             color={color || 'orange'}
             header={header}
             meta={time ? time : null}
             description={description}
+            style={{ margin: 0, height: '235px' }}
             extra={
                 <Button
                     onClick={handleLaunch}
