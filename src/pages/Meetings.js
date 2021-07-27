@@ -48,8 +48,9 @@ const Meetings = ({ store }) => {
             <MeetingsHeader />
             <Container textAlign="center">
                 <Segment basic textAlign="center">
-                    <h1 className={meetingStyles.header}>Your Meetings</h1>
+                    <h1 className={meetingStyles.header}>{meetings.length > 0 ? 'Meetings' : 'Welcome.'}</h1>
                     <Dropdown
+                        disabled = {meetings.length === 0}
                         name="sort"
                         floating
                         labeled
@@ -79,10 +80,10 @@ const Meetings = ({ store }) => {
                     ) : (
                         <Header size="huge" icon>
                             <Icon name="folder open" />
-                            No Meetings Found
+                            Click <Link to="/meetings/new">here</Link> to
+                            add a meeting.
                             <Header.Subheader>
-                                Click <Link to="/meetings/new">here</Link> to
-                                create one now.
+                                Or click the <i>new meeting</i> button above.
                             </Header.Subheader>
                         </Header>
                     )}

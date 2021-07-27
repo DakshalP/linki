@@ -34,10 +34,13 @@ $primary: #f2711c;
     cursor: pointer;
     transition: all 0.1s;
     border-radius: 100%;
+    transform: scale(1.5);
+
     &:hover {
-        border: 2px solid grey;
-        width: 20px;
-        height: 20px;
+        transform: scale(1.7);
+    }
+    
+    &:active {
         transform: scale(1.5);
     }
 }
