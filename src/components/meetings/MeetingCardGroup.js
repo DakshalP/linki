@@ -2,7 +2,6 @@ import React from 'react';
 import MeetingCard from './MeetingCard';
 import { Divider, Segment } from 'semantic-ui-react';
 import styles from '../../styles/meetings.module.scss';
-import { isElement } from 'react-dom/cjs/react-dom-test-utils.production.min';
 
 //convert to comparable numbers [HH, MM]
 const convertTime = (time) => {
