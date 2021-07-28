@@ -8,4 +8,4 @@ A simple way to store and manage links for online video meetings.
 
 ### Store all your meetings in one place!
 
-![alt text](./images/meetings_page.png)
+![alt text](./public/images/meetings_page.png)
