@@ -3,7 +3,6 @@ import {
     Container,
     Segment,
     Header,
-    Icon,
     Loader,
     Dropdown,
 } from 'semantic-ui-react';
@@ -79,7 +78,7 @@ const Meetings = ({ store }) => {
                         />
                     ) : (
                         <>
-                        <img src="/images/vault.svg" alt="image of vault"/>
+                        <img src="/images/vault.svg" alt="vault"/>
                         <Header size="huge" icon>
                             Click <Link to="/meetings/new">here</Link> to
                             add a meeting.
