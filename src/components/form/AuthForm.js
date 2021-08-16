@@ -4,7 +4,6 @@ import {
     Button,
     Form,
     Segment,
-    Icon,
     Message,
 } from 'semantic-ui-react';
 import { Formik } from 'formik';
@@ -43,7 +42,8 @@ const AuthForm = ({
                             loading={isSubmitting}
                         >
                             <Segment textAlign="center" basic>
-                                <Icon size="massive" name={formIcon}></Icon>
+                                {/* <Icon size="massive" name={formIcon}></Icon> */}
+                                <img className={formStyles.formImage} src={`/images/${formIcon}.svg`} alt="secure"></img>
                                 <Header as="h2">{formHeader}</Header>
                                 <p>{formDescription}</p>
                             </Segment>

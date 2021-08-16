@@ -78,14 +78,16 @@ const Meetings = ({ store }) => {
                             {...{ meetings, onEdit }}
                         />
                     ) : (
+                        <>
+                        <img src="/images/vault.svg" alt="image of vault"/>
                         <Header size="huge" icon>
-                            <Icon name="folder open" />
                             Click <Link to="/meetings/new">here</Link> to
                             add a meeting.
                             <Header.Subheader>
                                 Or click the <i>new meeting</i> button above.
                             </Header.Subheader>
                         </Header>
+                        </>
                     )}
                 </Segment>
             </Container>
